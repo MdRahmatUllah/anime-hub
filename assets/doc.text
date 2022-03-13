@@ -1,0 +1,17 @@
+APIs
+----
+getAnimeById: https://api.jikan.moe/v4/anime/{id}
+getAnimeGenres: https://api.jikan.moe/v4/genres/anime
+getMangaGenres: https://api.jikan.moe/v4/genres/manga
+
+getMangaRecommendations: https://api.jikan.moe/v4/manga/{id}/recommendations
+getMangaSearch: https://api.jikan.moe/v4/manga
+getRecentAnimeRecommendations: https://api.jikan.moe/v4/recommendations/anime
+
+
+The code which is used to fetch data from the JSON file (see the full code below):
+Future<void> readJson() async {
+    final String response = await rootBundle.loadString('assets/sample.json');
+    final data = await json.decode(response);
+    // ... 
+}
