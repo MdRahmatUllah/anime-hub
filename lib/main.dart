@@ -1,14 +1,24 @@
+import 'package:anime_hub/providers/providers_top_anime.dart';
+import 'package:anime_hub/screens/screen_anime.dart';
 import 'package:anime_hub/screens/screen_genres_details.dart';
 import 'package:anime_hub/screens/screen_category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/providers_genres.dart';
 import 'screens/screen_start.dart';
+import 'screens/screen_top_anime.dart';
 import 'universal_data/ui_size_data.dart';
+import 'widgets/cover_slide_show.dart';
 
 void main(List<String> args) {
-  runApp(MainApp());
+  // set app orientation to portrait only
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MainApp());
+  });
 }
 
 class MainApp extends StatefulWidget {
@@ -31,6 +41,9 @@ class _MainAppState extends State<MainApp> {
         ChangeNotifierProvider(
           create: (ctx) => GenresProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => TopAnimeProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'Anime Hub',
@@ -50,9 +63,12 @@ class _MainAppState extends State<MainApp> {
           ),
         ),
         home: StartPage(),
+        // home: CoverSlideShow(),
         routes: {
           CategoryScreen.routeName: (ctx) => const CategoryScreen(),
           GenresDetailsScreen.routeName: (ctx) => const GenresDetailsScreen(),
+          TopAnimeScreen.routeName: (ctx) => const TopAnimeScreen(),
+          AnimeScreen.routeName: (ctx) => const AnimeScreen(),
         },
       ),
     );

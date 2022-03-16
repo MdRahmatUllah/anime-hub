@@ -1,24 +1,11 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class GenresTiles extends StatelessWidget {
-  final String name;
-  final int mal_Id;
-  final String url;
-  final int count;
-  final defaultImage = 'assets/images/';
-  const GenresTiles({
-    Key? key,
-    required this.mal_Id,
-    required this.name,
-    this.url = '',
-    this.count = 0,
-  }) : super(key: key);
-  int randomNumberGen() {
-    return Random().nextInt(100) % 4 + 1;
-  }
+class AnimeTiles extends StatelessWidget {
+  final animeData;
+
+  const AnimeTiles({Key? key, required this.animeData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +14,7 @@ class GenresTiles extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           image: DecorationImage(
-            image: AssetImage(
-                'assets/images/sample_image_${randomNumberGen()}.jpg'),
+            image: NetworkImage(animeData['images']['jpg']['image_url']),
             fit: BoxFit.cover,
             alignment: Alignment.topCenter,
           ),
@@ -39,16 +25,16 @@ class GenresTiles extends StatelessWidget {
             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: Image.asset(
-                        'assets/images/sample_image_${randomNumberGen()}.jpg')
-                    .image,
+                backgroundImage:
+                    Image.network(animeData['images']['jpg']['image_url'])
+                        .image,
               ),
               title: Text(
-                name,
+                animeData['title'],
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              subtitle: Text('Count: $count'),
+              subtitle: Text(animeData['status']),
             ),
           ),
         ),

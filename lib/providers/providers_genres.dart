@@ -9,9 +9,7 @@ class GenresProvider with ChangeNotifier {
   Map<String, dynamic> _genresData = {};
 
   Map<String, dynamic> get getGenres {
-    // getAnimeGeners();
     print('getGenres');
-
     return _genresData;
   }
 
