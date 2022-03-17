@@ -1,9 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:jikan_api/jikan_api.dart';
 
 class AnimeTiles extends StatelessWidget {
-  final animeData;
+  final Top animeData;
 
   const AnimeTiles({Key? key, required this.animeData}) : super(key: key);
 
@@ -14,7 +15,7 @@ class AnimeTiles extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           image: DecorationImage(
-            image: NetworkImage(animeData['images']['jpg']['image_url']),
+            image: NetworkImage(animeData.imageUrl),
             fit: BoxFit.cover,
             alignment: Alignment.topCenter,
           ),
@@ -25,16 +26,14 @@ class AnimeTiles extends StatelessWidget {
             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage:
-                    Image.network(animeData['images']['jpg']['image_url'])
-                        .image,
+                backgroundImage: Image.network(animeData.imageUrl).image,
               ),
               title: Text(
-                animeData['title'],
+                animeData.title,
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              subtitle: Text(animeData['status']),
+              subtitle: Text('Scores: ' + animeData.score.toString()),
             ),
           ),
         ),

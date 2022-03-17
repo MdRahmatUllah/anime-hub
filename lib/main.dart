@@ -1,11 +1,14 @@
 import 'package:anime_hub/providers/providers_top_anime.dart';
+import 'package:anime_hub/providers/providers_top_manga.dart';
 import 'package:anime_hub/screens/screen_anime.dart';
 import 'package:anime_hub/screens/screen_genres_details.dart';
 import 'package:anime_hub/screens/screen_category.dart';
+import 'package:anime_hub/screens/screen_top_manga.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/providers_anime_data.dart';
 import 'providers/providers_genres.dart';
 import 'screens/screen_start.dart';
 import 'screens/screen_top_anime.dart';
@@ -44,6 +47,12 @@ class _MainAppState extends State<MainApp> {
         ChangeNotifierProvider(
           create: (ctx) => TopAnimeProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => AnimeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => TopMangaProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'Anime Hub',
@@ -69,6 +78,7 @@ class _MainAppState extends State<MainApp> {
           GenresDetailsScreen.routeName: (ctx) => const GenresDetailsScreen(),
           TopAnimeScreen.routeName: (ctx) => const TopAnimeScreen(),
           AnimeScreen.routeName: (ctx) => const AnimeScreen(),
+          TopMangaScreen.routeName: (ctx) => const TopMangaScreen(),
         },
       ),
     );
